@@ -1,0 +1,59 @@
+﻿@model LoginRequestModel
+
+
+@{
+    ViewData["Title"] = "Employee Login";
+}
+
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4 text-primary fw-bold">
+                        Employee Login
+                    </h3>
+
+                    <form asp-controller="Login" asp-action="UserLogin" method="post">
+                        @* <form action="/Login/LoginAsync" method="post"> *@
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <input type="email" class="form-control form-control-lg"
+                                   id="EmployeeEmail" name="Username"
+                                   placeholder="Email address" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="password" class="form-control form-control-lg"
+                                   id="EmployeePassword" name="Password"
+                                   placeholder="UserId" required />
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold">
+                                Log In
+                            </button>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <a asp-action="ForgotPassword" class="text-decoration-none">Forgotten password?</a>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-grid">
+                            <a asp-action="Register" class="btn btn-success btn-lg fw-bold">
+                                Create New Account
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 text-muted">
+                © 2026 Employee Management System
+            </p>
+        </div>
+    </div>
+</div>

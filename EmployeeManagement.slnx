@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.rm" />
+  </Folder>
+  <Project Path="EmployeeManagementSystem.Database/EmployeeManagementSystem.Database.csproj" Id="10504bb5-3c88-4f52-a000-3c8aaafddcd6" />
+  <Project Path="EmployeeManagementSystem/EmployeeManagementSystem.csproj" />
+</Solution>

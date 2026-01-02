@@ -1,0 +1,88 @@
+﻿@model TblEmployee
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-pencil-square me-2"></i> Edit Employee
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Update" asp-route-id="@Model.EmployeesId" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="EmployeesId" class="form-label">ID</label>
+                            <input asp-for="EmployeesId" class="form-control" readonly />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeeFirstName" class="form-label">First Name</label>
+                                <input asp-for="EmployeeFirstName" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeesLastName" class="form-label">Last Name</label>
+                                <input asp-for="EmployeesLastName" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EmployeeEmail" class="form-label">Email</label>
+                            <input asp-for="EmployeeEmail" type="email" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EmployeePhone" class="form-label">Phone</label>
+                            <input asp-for="EmployeePhone" type="tel" class="form-control" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeeDepartment" class="form-label">Department</label>
+                                <input asp-for="EmployeeDepartment" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeePosition" class="form-label">Position</label>
+                                <input asp-for="EmployeePosition" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeeSalary" class="form-label">Salary</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input asp-for="EmployeeSalary" type="number" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EmployeeHireDate" class="form-label">Hire Date</label>
+                                <input asp-for="EmployeeHireDate" type="date" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-save me-1"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

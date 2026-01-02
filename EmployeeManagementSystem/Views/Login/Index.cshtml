@@ -1,0 +1,20 @@
+﻿@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Employee Login";
+    string fullName = "Guest";
+
+    if (HttpContextAccessor.HttpContext.Session.GetString("Login") != null)
+    {
+        var str = HttpContextAccessor.HttpContext.Session.GetString("Login");
+        var user = JsonConvert.DeserializeObject<TblEmployee>(str);
+        fullName = user.EmployeeFirstName;
+    }
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 "> Welcome, @fullName</h1>     
+
+</div>

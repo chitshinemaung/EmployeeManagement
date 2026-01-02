@@ -1,0 +1,100 @@
+﻿@model CreateEmployeeModel
+
+@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-plus me-2"></i> Add New Employee
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Save" method="post" class="row g-3">
+                        @Html.AntiForgeryToken()
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeFirstName" class="form-label"></label>
+                            <input asp-for="EmployeeFirstName" class="form-control" placeholder="Enter first name" />
+                            <span asp-validation-for="EmployeeFirstName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeesLastName" class="form-label"></label>
+                            <input asp-for="EmployeesLastName" class="form-control" placeholder="Enter last name" />
+                            <span asp-validation-for="EmployeesLastName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="EmployeeEmail" class="form-label"></label>
+                            <input asp-for="EmployeeEmail" type="email" class="form-control" placeholder="Enter email address" />
+                            <span asp-validation-for="EmployeeEmail" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="EmployeePhone" class="form-label"></label>
+                            <input asp-for="EmployeePhone" type="tel" class="form-control" placeholder="Enter phone number" />
+                            <span asp-validation-for="EmployeePhone" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeDepartment" class="form-label"></label>
+                            <select asp-for="EmployeeDepartment" class="form-select">
+                                <option value="">Choose...</option>
+                                <option>Engineer</option>
+                                <option>HR</option>
+                                <option>Finance</option>
+                                <option>Marketing</option>
+                            </select>
+                            <span asp-validation-for="EmployeeDepartment" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeePosition" class="form-label"></label>
+                            <select asp-for="EmployeePosition" class="form-select">
+                                <option value="">Choose...</option>
+                                <option>Manager</option>
+                                <option>Supervisor</option>
+                                <option>Office Staff</option>
+                                <option>Senior Manager</option>
+                            </select>
+                            <span asp-validation-for="EmployeePosition" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeSalary" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="EmployeeSalary" type="number" class="form-control" placeholder="Enter salary" />
+                            </div>
+                            <span asp-validation-for="EmployeeSalary" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeHireDate" class="form-label"></label>
+                            <input asp-for="EmployeeHireDate" type="date" class="form-control" />
+                            <span asp-validation-for="EmployeeHireDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-1"></i> Create Employee
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
