@@ -1,5 +1,17 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor
 
+@{
+    ViewData["Title"] = "Main Page";
+    string comeUser = "Guest";
+
+
+    if (HttpContextAccessor.HttpContext.Session.GetString("Login") != null)
+    {
+        var str = HttpContextAccessor.HttpContext.Session.GetString("Login");
+        var user = JsonConvert.DeserializeObject<TblEmployee>(str);
+        comeUser = user.EmployeeFirstName;
+    }
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,37 +37,82 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index">
-                            <i class="fas fa-home me-1"></i> Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Employee" asp-action="Index">
-                            <i class="fas fa-users me-1"></i> Employees
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Employee" asp-action="RestoreData">
-                            <i class="fas fa-building me-1"></i> RestoreData
-                        </a>
-                    </li>
-                   @*  <li class="nav-item">
+                    @if(HttpContextAccessor.HttpContext.Session.GetString("Login") != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Employee" asp-action="Index">
+                                <i class="fas fa-users me-1"></i> Employees
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Employee" asp-action="RestoreData">
+                                <i class="fas fa-building me-1"></i> RestoreData
+                            </a>
+                        </li>
+                    }
+
+                   
+                    @*  <li class="nav-item">
                         <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
                             <i class="fas fa-chart-bar me-1"></i> Dashboard
                         </a>
                     </li> *@
                 </ul>
-                <div class="d-flex align-items-center">
+               @*  <div class="d-flex align-items-center">
                     <div class="me-3 text-light">
-                        <i class="fas fa-user-circle me-1"></i> Welcome
+                        <i class="fas fa-user-circle me-1"></i> Welcome! @comeUser
                     </div>
                     <form asp-controller="Logout" asp-action="Index" method="post">
                         <button class="btn btn-light btn-sm" type="submit">
                             <i class="fas fa-sign-out-alt me-1"></i> Logout
                         </button>
                     </form>
+                </div> *@
+            
+
+                @{
+                     var now = DateTime.Now;
+                     string greeting;
+
+                     if (now.Hour >= 5 && now.Hour < 12)
+                     {
+                         greeting = "Good Morning";
+                     }
+                     else if (now.Hour >= 12 && now.Hour < 17)
+                     {
+                         greeting = "Good Afternoon";
+                     }
+                     else if (now.Hour >= 17 && now.Hour < 21)
+                     {
+                         greeting = "Good Evening";
+                     }
+                     else
+                     {
+                         greeting = "Good Night";
+                     }
+                }
+                
+
+                <div class="d-flex align-items-center">
+                    <div class="me-3 text-light">
+                        <i class="fas fa-user-circle me-1"></i> Welcome! @greeting @comeUser
+                    </div>
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("Login") != null)
+                    {
+                        <form asp-controller="Logout" asp-action="Index" method="post">
+                            <button class="btn btn-light btn-sm" type="submit">
+                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            </button>
+                        </form>
+                    }
                 </div>
+
             </div>
         </div>
     </nav>

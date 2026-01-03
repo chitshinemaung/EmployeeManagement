@@ -39,7 +39,9 @@ namespace EmployeeManagementSystem.Controllers
             var loginData = await _loginUserRepositories.permitUserAsync(request);
             //var loginData = JsonConvert.SerializeObject(loginUser);
             HttpContext.Session.SetString("Login", loginData);
-                return RedirectToAction("UserHome");
+            
+            return RedirectToAction("UserHome");
+            
         }
     }
 }

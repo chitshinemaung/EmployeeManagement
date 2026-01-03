@@ -96,7 +96,7 @@ namespace EmployeeManagementSystem.Repositories
                 employee.EmployeePosition = uemployee.EmployeePosition;
                 employee.EmployeeSalary = uemployee.EmployeeSalary;
                 employee.EmployeeHireDate = uemployee.EmployeeHireDate;
-                employee.EmployeeDeleteFlag = true;
+                employee.EmployeeDeleteFlag = false;
                 _db.TblEmployees.Update(employee);
                 await _db.SaveChangesAsync();
             }
@@ -107,12 +107,13 @@ namespace EmployeeManagementSystem.Repositories
         public async Task<TblEmployee> DeleteEmployeeByIdAsync(string id)
         {
             var delemployee = await _db.TblEmployees
-                .FirstOrDefaultAsync(e => e.EmployeesId == id && e.EmployeeDeleteFlag == false);
+                .Where(e => e.EmployeeDeleteFlag == false)
+                .FirstOrDefaultAsync(e => e.EmployeesId == id);
             
             if (delemployee != null)
             {
                 delemployee.EmployeeDeleteFlag = true;
-                _db.Update(delemployee);
+                _db.TblEmployees.Update(delemployee);
                 await _db.SaveChangesAsync();
             }
             return delemployee;
@@ -121,12 +122,13 @@ namespace EmployeeManagementSystem.Repositories
         public async Task<TblEmployee> RestoreEmployeeByIdAsync(string id)
         {
             var resemployee = await _db.TblEmployees
-                .FirstOrDefaultAsync (e => e.EmployeesId == id && e.EmployeeDeleteFlag == true);
+                .Where(e=> e.EmployeeDeleteFlag == true)
+                .FirstOrDefaultAsync (e => e.EmployeesId == id);
 
             if(resemployee != null)
             {
                 resemployee.EmployeeDeleteFlag = false;
-                _db.Update(resemployee);
+                _db.TblEmployees.Update(resemployee);
                 await _db.SaveChangesAsync();
             }
             return resemployee;

@@ -59,10 +59,11 @@ namespace EmployeeManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteEmployee(string id)
         {
-            _employeeRepository.DeleteEmployeeByIdAsync(id);
+            await _employeeRepository.DeleteEmployeeByIdAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -75,7 +76,7 @@ namespace EmployeeManagementSystem.Controllers
         [ActionName("Restore")]
         public async Task<IActionResult> BackData(string id)
         {
-            _employeeRepository.RestoreEmployeeByIdAsync(id);
+            await _employeeRepository.RestoreEmployeeByIdAsync(id);
             return RedirectToAction("Index");
         }
 
