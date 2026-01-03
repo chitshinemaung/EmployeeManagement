@@ -9,20 +9,34 @@
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Path.ToString().ToLower() != "/Login/UserLogin")
+            var path = context.Request.Path.ToString().ToLower();
+            if (path.StartsWith("/login"))
             {
                 await _next(context);
                 return;
             }
-            var loginData = context.Session.GetString("Login");
 
+            var loginData = context.Session.GetString("Login");
             if (string.IsNullOrEmpty(loginData))
             {
-
-                context.Response.Redirect("/Login/UserLogin");
+                context.Response.Redirect("/Login/UserLoginIndex");
+                return;
             }
 
-            await _next(context);
+            //if (context.Request.Path.ToString().ToLower() != "/login")
+            //{
+            //    var loginData = context.Session.GetString("Login");
+
+            //    if (string.IsNullOrEmpty(loginData))
+            //    {
+
+            //        context.Response.Redirect("/Login/UserLoginIndex");
+            //    }
+
+            //}
+
+
+             await _next(context);
         }
     }
 

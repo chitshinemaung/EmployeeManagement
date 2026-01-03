@@ -28,9 +28,16 @@
             </a>
         </div>
 
-        <div class="ms-3">
+        @* <div class="ms-3">
             <input id="searchBox" type="text" class="form-control" placeholder="Search employees..." />
+        </div> *@
+        <div class="ms-3">
+            <form asp-controller="Employee" asp-action="Search" method="get" class="d-flex">
+                <input id="searchBox" type="text" name="firstname" class="form-control" placeholder="Search employees..." />
+                <button type="submit" class="btn btn-primary ms-2">Search</button>
+            </form>
         </div>
+
     </div>
 
     <div class="card shadow-sm">

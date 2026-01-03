@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -46,7 +48,7 @@
                 </ul>
                 <div class="d-flex align-items-center">
                     <div class="me-3 text-light">
-                        <i class="fas fa-user-circle me-1"></i> Welcome, Admin
+                        <i class="fas fa-user-circle me-1"></i> Welcome
                     </div>
                     <form asp-controller="Logout" asp-action="Index" method="post">
                         <button class="btn btn-light btn-sm" type="submit">

@@ -1,5 +1,6 @@
 using EmployeeManagementSystem.Database.EmployeeDB;
 using EmployeeManagementSystem.Middlewares;
+using EmployeeManagementSystem.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,11 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ILoginUserRepositories,LoginUserRepositories>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
 builder.Services.AddDistributedMemoryCache(); 
 
 builder.Services.AddSession(options =>
+
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromHours(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 }); 
@@ -45,6 +50,6 @@ app.UseSessionMiddleware();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=UserLogin}/{id?}");
+    pattern: "{controller=Login}/{action=UserLoginIndex}/{id?}");
 
 app.Run();

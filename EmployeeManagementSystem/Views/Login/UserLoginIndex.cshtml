@@ -1,4 +1,4 @@
-﻿@model LoginRequestModel
+﻿@model IEnumerable<TblEmployee>
 
 
 @{
@@ -14,7 +14,7 @@
                         Employee Login
                     </h3>
 
-                    <form asp-controller="Login" asp-action="UserLogin" method="post">
+                    <form action="UserLogin" method="post">
                         @* <form action="/Login/LoginAsync" method="post"> *@
                         @Html.AntiForgeryToken()
 
